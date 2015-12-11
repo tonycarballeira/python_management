@@ -28,10 +28,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-AUTH_USER_MODEL = 'main_tables.SysSyaAccount'
+# AUTH_USER_MODEL = 'main_tables.SysSyaAccount'
 
 
 # Application definition
+
+ADMIN_ENABLED = False
 
 INSTALLED_APPS = (
     'django.contrib.admin',
