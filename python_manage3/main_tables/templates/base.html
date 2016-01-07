@@ -1,0 +1,20 @@
+{% load staticfiles	 %}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Management</title>
+        <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    </head>
+
+    <body>
+
+		<div class="header"></div>
+
+   			<div class="bod">{% block body_block %}{% endblock %}</div>
+
+		<div class="footer"></div>
+
+    </body>
+
+</html>

@@ -1,45 +1,42 @@
-<!DOCTYPE html>
-	<html>
-		<head>
-			{% load helpers %}
-		</head>
+{% extends 'base.html' %}
+{% load helpers %}
 
-		<body>
-			{% with cookie=request.COOKIES.new_cook %}    
+
+{% block body_block %}
+	{% with cookie=request.COOKIES.new_cook %}    
+	
+		{% if cookie %}
+
+			<p>you are signed in!</p>
+
+			<h2>Your Module Names:</h2>
+
+			{% my_modules cookie as mods %}
+
+			<ul>
+				{% for x in mods %}
+					<li>
+						<a href="{% url 'module' x.sym_id %}">{{x}}</a>
+					</li>
+				{% endfor %}
+			</ul>
+
+		{% else %}
+
+			<h1>Sign In</h1>
+		
+			<form method="POST" action="/sign_in"> {% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit">
+			</form>
 			
-				{% if cookie %}
+			</br>
 
-					<p>you are signed in!</p>
+			<p>{{ error }}</p>			
+			
+		{% endif %}
 
-					<h2>Your Module Names:</h2>
+	{% endwith %}	
+{% endblock %}	
 
-					{% my_modules cookie as mods %}
-
-					<ul>
-						{% for x in mods %}
-							<li>
-								<a href="{% url 'module' x.sym_id %}">{{x}}</a>
-							</li>
-						{% endfor %}
-					</ul>
-
-				{% else %}
-
-					<h1>Sign In</h1>
-				
-					<form method="POST" action="/sign_in"> {% csrf_token %}
-						{{ form.as_p }}
-						<input type="submit">
-					</form>
-					
-					</br>
-
-					<p>{{ error }}</p>			
-					
-				{% endif %}
-
-			{% endwith %}		
-
-		</body>
-
-	</html>
+	
